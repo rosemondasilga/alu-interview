@@ -4,25 +4,25 @@
 
 
 def rain(walls):
-    """
-    Function that gets the water drop from walls.
-    Args:
-        param1: walls wallsay structure.
-    Returns:
-        The water inside walls
-    """
-    left = 0
-    right = len(walls) - 1
-    left_max = 0
-    right_max = 0
-    result = 0
-    while (left <= right):
-        if right_max <= left_max:
-            result += max(0, right_max - walls[right])
-            right_max = max(right_max, walls[right])
-            right -= 1 
-        else:
-            result += max(0, left_max - walls[left])
-            left_max = max(left_max, walls[left])
-            left += 1
-    return result
+    if not walls:
+        return 0
+
+    n = len(walls)
+    lmax = [0] * n
+    rmax = [0] * n
+
+    lmax[0] = walls[0]
+    for i in range(1, n):
+        lmax[i] = max(lmax[i - 1], walls[i])
+
+    rmax[n - 1] = walls[n - 1]
+    for i in range(n - 2, -1, -1):
+        rmax[i] = max(rmax[i + 1], walls[i])
+
+    total_water = 0
+    for i in range(n):
+        water_height = min(lmax[i], rmax[i]) - walls[i]
+        if water_height > 0:
+            total_water += water_height
+
+    return total_water
