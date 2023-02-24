@@ -2,6 +2,7 @@
 
 """square units of water will be retained after it rains"""
 
+
 def rain(walls):
     """
     Function that gets the water drop from walls.
@@ -19,7 +20,7 @@ def rain(walls):
         if right_max <= left_max:
             result += max(0, right_max - walls[right])
             right_max = max(right_max, walls[right])
-            right -= 1
+            right -= 1 
         else:
             result += max(0, left_max - walls[left])
             left_max = max(left_max, walls[left])
